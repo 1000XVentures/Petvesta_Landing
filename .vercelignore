@@ -1,0 +1,13 @@
+# Dependencies and tooling
+node_modules
+.git
+.env
+.env.*
+*.log
+
+# Stitch export (design reference, not needed for deploy)
+stitch-export
+
+# Optional: keep these if you want them deployed
+# assets
+# scripts

@@ -1,0 +1,1953 @@
+<!doctype html>
+<html class="scroll-smooth" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="PetVesta delivers premium, background-checked pet care—concierge services, real-time GPS, health logs, and 24/7 love for discerning pet parents."
+    />
+    <meta name="theme-color" content="#F8F4EF" />
+    <title>PetVesta | The Gold Standard of Bespoke Pet Care</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Sora:wght@100..800&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              vestaIvory: "#F8F4EF",
+              vestaOrange: "#E85419",
+              vestaCharcoal: "#1C1814",
+              vestaSand: "#EFE9E1",
+            },
+            fontFamily: {
+              sora: ["Sora", "sans-serif"],
+              dm: ["DM Sans", "sans-serif"],
+            },
+            borderRadius: {
+              "4xl": "2rem",
+              "5xl": "3rem",
+              "6xl": "4rem",
+            },
+            boxShadow: {
+              premium: "0 40px 100px -20px rgba(28, 24, 20, 0.08)",
+              "premium-lg": "0 60px 120px -30px rgba(28, 24, 20, 0.12)",
+            },
+          },
+        },
+      };
+    </script>
+    <style data-purpose="custom-animations">
+      .text-outline {
+        -webkit-text-stroke: 1px rgba(28, 24, 20, 0.08);
+        color: transparent;
+      }
+
+      .glass-nav {
+        background: rgba(248, 244, 239, 0);
+        backdrop-filter: blur(0px);
+        transition: all 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+      }
+      .glass-nav.scrolled {
+        background: rgba(248, 244, 239, 0.85);
+        backdrop-filter: blur(24px);
+        border-bottom: 1px solid rgba(28, 24, 20, 0.05);
+      }
+      .nav-inner-padding {
+        padding-top: 1.5rem;
+        padding-bottom: 1.5rem;
+      }
+      @media (min-width: 1024px) {
+        .nav-inner-padding {
+          padding-top: 2rem;
+          padding-bottom: 2rem;
+        }
+      }
+      .glass-nav.scrolled .nav-inner-padding {
+        padding-top: 0.5rem;
+        padding-bottom: 0.5rem;
+      }
+
+      .scroll-progress-bar {
+        height: 4px;
+        background: #e85419;
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 101;
+        width: 0%;
+        transform-origin: left;
+      }
+      .sr-only {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+        border: 0;
+      }
+      .focus\:not-sr-only:focus {
+        position: absolute;
+        width: auto;
+        height: auto;
+        padding: inherit;
+        margin: 0;
+        overflow: visible;
+        clip: auto;
+        white-space: normal;
+      }
+
+      .reveal-text-container {
+        clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
+      }
+
+      .magnetic-btn-wrap {
+        display: inline-block;
+      }
+
+      .char {
+        display: inline-block;
+        transform: translateY(110%);
+        opacity: 0;
+      }
+
+      ::-webkit-scrollbar {
+        width: 6px;
+      }
+      ::-webkit-scrollbar-track {
+        background: #f8f4ef;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #1c1814;
+        border-radius: 10px;
+      }
+
+      .image-mask {
+        clip-path: inset(100% 0 0 0);
+      }
+
+      .step-dot {
+        transition: all 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+      }
+      .step-active .step-dot {
+        background-color: #e85419;
+        box-shadow: 0 0 30px rgba(232, 84, 25, 0.8);
+        transform: scale(1.6);
+      }
+      .step-active .step-number {
+        color: rgba(232, 84, 25, 0.15);
+        transform: translateY(-20px);
+      }
+
+      .image-reveal-container {
+        overflow: hidden;
+        border-radius: 2.5rem;
+      }
+
+      .pill-nav-item {
+        position: relative;
+      }
+      .pill-nav-item::after {
+        content: "";
+        position: absolute;
+        bottom: -4px;
+        left: 50%;
+        width: 0;
+        height: 2px;
+        background: #e85419;
+        transition: all 0.4s ease;
+        transform: translateX(-50%);
+      }
+      .pill-nav-item:hover::after,
+      .pill-nav-item:focus-visible::after {
+        width: 100%;
+      }
+
+      /* Focus visible for a11y */
+      a:focus-visible,
+      button:focus-visible {
+        outline: 2px solid #e85419;
+        outline-offset: 2px;
+      }
+
+      /* Mobile menu */
+      .nav-drawer {
+        transform: translateX(100%);
+        transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+      }
+      .nav-drawer.open {
+        transform: translateX(0);
+      }
+      .hamburger span {
+        transition:
+          transform 0.3s,
+          opacity 0.3s;
+      }
+      .hamburger.open span:nth-child(1) {
+        transform: translateY(7px) rotate(45deg);
+      }
+      .hamburger.open span:nth-child(2) {
+        opacity: 0;
+      }
+      .hamburger.open span:nth-child(3) {
+        transform: translateY(-7px) rotate(-45deg);
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .char,
+        .step-dot,
+        .step-number,
+        .parallax-element,
+        .image-reveal,
+        .reveal-up {
+          transition: none !important;
+        }
+      }
+
+      /* Production: typography scale & alignment */
+      .font-sora {
+        letter-spacing: -0.02em;
+      }
+      .text-vestaCharcoal\/50,
+      .text-vestaCharcoal\/40,
+      .text-white\/40,
+      .text-white\/30 {
+        line-height: 1.65;
+      }
+      h1.font-sora,
+      h2.font-sora,
+      h3.font-sora {
+        letter-spacing: -0.03em;
+      }
+      /* Prevent step number from overlapping title */
+      .step-item h3 {
+        position: relative;
+        z-index: 1;
+      }
+      .step-number {
+        pointer-events: none;
+        z-index: 0;
+      }
+      /* Hero floats: contain so they don’t overlap content on small viewports */
+      @media (max-width: 1279px) {
+        .hero-float-wrap {
+          display: none !important;
+        }
+      }
+      /* About vision card: no overlap on small screens */
+      @media (max-width: 1023px) {
+        .about-vision-card {
+          position: relative;
+          margin-top: 1.5rem;
+          left: 0;
+          right: 0;
+          bottom: auto;
+          max-width: 100%;
+        }
+      }
+      /* App notifications: don’t overlap phone on medium screens */
+      @media (min-width: 1024px) and (max-width: 1279px) {
+        .notification-card.top-left {
+          left: 0;
+          top: 10%;
+        }
+        .notification-card.bottom-right {
+          right: 0;
+          bottom: 25%;
+        }
+      }
+      /* Touch targets */
+      @media (pointer: coarse) {
+        .pill-nav-item,
+        .magnetic-btn,
+        .hamburger {
+          min-height: 44px;
+          min-width: 44px;
+        }
+      }
+    </style>
+  </head>
+  <body
+    class="bg-vestaIvory font-dm text-vestaCharcoal overflow-x-hidden selection:bg-vestaOrange selection:text-white"
+  >
+    <a
+      href="#main-content"
+      class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[102] focus:px-4 focus:py-2 focus:bg-vestaOrange focus:text-white focus:rounded-lg font-bold"
+      >Skip to main content</a
+    >
+    <div class="scroll-progress-bar" aria-hidden="true"></div>
+
+    <!-- Navigation -->
+    <header>
+      <nav class="fixed top-0 w-full z-[60] glass-nav" role="navigation">
+        <div
+          class="max-w-7xl mx-auto px-4 sm:px-8 flex justify-between items-center transition-all duration-700 nav-inner-padding"
+          id="nav-inner"
+        >
+          <a
+            href="#"
+            class="flex items-center gap-3 group cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-vestaOrange focus-visible:ring-offset-2 rounded"
+            aria-label="PetVesta home"
+          >
+            <div
+              class="w-10 h-10 bg-vestaOrange rounded-full flex items-center justify-center transition-transform duration-500 group-hover:rotate-[360deg]"
+            >
+              <span class="text-white font-bold text-xs">PV</span>
+            </div>
+            <span
+              class="font-sora font-extrabold text-xl sm:text-2xl tracking-tight"
+              >PetVesta</span
+            >
+          </a>
+          <div
+            class="hidden lg:flex items-center gap-8 xl:gap-12 font-bold text-[10px] uppercase tracking-[0.25em]"
+          >
+            <a
+              class="pill-nav-item hover:text-vestaOrange transition-colors py-2"
+              href="#services"
+              >Services</a
+            >
+            <a
+              class="pill-nav-item hover:text-vestaOrange transition-colors py-2"
+              href="#how-it-works"
+              >Process</a
+            >
+            <a
+              class="pill-nav-item hover:text-vestaOrange transition-colors py-2"
+              href="#sitters"
+              >Sitters</a
+            >
+            <a
+              class="pill-nav-item hover:text-vestaOrange transition-colors py-2"
+              href="#pricing"
+              >Pricing</a
+            >
+          </div>
+          <div class="flex items-center gap-4 sm:gap-8">
+            <a
+              class="hidden sm:block text-[10px] font-bold uppercase tracking-[0.25em] hover:text-vestaOrange transition-colors py-2"
+              href="#"
+              >Sign In</a
+            >
+            <div class="magnetic-btn-wrap">
+              <a
+                class="bg-vestaCharcoal text-white px-6 sm:px-8 py-3 sm:py-4 rounded-full text-[10px] font-bold uppercase tracking-[0.25em] hover:bg-vestaOrange hover:shadow-xl transition-all magnetic-btn block text-center"
+                href="#"
+                >Get Started</a
+              >
+            </div>
+            <button
+              type="button"
+              class="lg:hidden hamburger flex flex-col justify-center gap-1.5 w-10 h-10 p-2 rounded focus:outline-none focus-visible:ring-2 focus-visible:ring-vestaOrange"
+              aria-label="Open menu"
+              aria-expanded="false"
+              aria-controls="nav-drawer"
+              id="hamburger"
+            >
+              <span class="w-5 h-0.5 bg-vestaCharcoal block"></span>
+              <span class="w-5 h-0.5 bg-vestaCharcoal block"></span>
+              <span class="w-5 h-0.5 bg-vestaCharcoal block"></span>
+            </button>
+          </div>
+        </div>
+        <!-- Mobile drawer -->
+        <div
+          id="nav-drawer"
+          class="nav-drawer fixed top-0 right-0 bottom-0 w-full max-w-sm bg-vestaIvory/98 backdrop-blur-xl shadow-premium-lg z-40 lg:hidden pt-24 px-8 pb-8"
+          aria-hidden="true"
+        >
+          <div
+            class="flex flex-col gap-8 font-bold text-[10px] uppercase tracking-[0.25em]"
+          >
+            <a
+              class="pill-nav-item hover:text-vestaOrange py-3"
+              href="#services"
+              >Services</a
+            >
+            <a
+              class="pill-nav-item hover:text-vestaOrange py-3"
+              href="#how-it-works"
+              >Process</a
+            >
+            <a class="pill-nav-item hover:text-vestaOrange py-3" href="#sitters"
+              >Sitters</a
+            >
+            <a class="pill-nav-item hover:text-vestaOrange py-3" href="#pricing"
+              >Pricing</a
+            >
+            <a class="pill-nav-item hover:text-vestaOrange py-3" href="#"
+              >Sign In</a
+            >
+            <a
+              class="bg-vestaCharcoal text-white px-8 py-4 rounded-full text-center hover:bg-vestaOrange"
+              href="#"
+              >Get Started</a
+            >
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main id="main-content">
+      <!-- Hero Section -->
+      <section
+        class="relative min-h-screen flex items-center pt-32 sm:pt-40 pb-24 sm:pb-32 px-4 sm:px-8 overflow-hidden"
+      >
+        <div
+          class="absolute top-1/2 left-0 -translate-y-1/2 text-[18vw] font-sora font-black text-outline select-none pointer-events-none z-0 whitespace-nowrap opacity-[0.07]"
+          id="hero-bg-text"
+          aria-hidden="true"
+        >
+          LUXURY PET CARE
+        </div>
+        <div
+          class="max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20 items-center relative z-10"
+        >
+          <div class="lg:col-span-7">
+            <div class="hero-content">
+              <div
+                class="inline-flex items-center gap-4 bg-white/50 backdrop-blur-md border border-vestaCharcoal/5 px-4 sm:px-6 py-3 rounded-full mb-8 sm:mb-10 reveal-up"
+              >
+                <span
+                  class="text-[10px] font-black uppercase tracking-[0.3em] text-vestaOrange"
+                  >The Platinum Network</span
+                >
+                <div class="w-px h-4 bg-vestaCharcoal/10"></div>
+                <div class="flex -space-x-3">
+                  <div
+                    class="w-8 h-8 rounded-full border-2 border-white shadow-sm overflow-hidden bg-vestaSand"
+                  >
+                    <img
+                      alt=""
+                      class="w-full h-full object-cover"
+                      src="https://images.unsplash.com/photo-1561037404-61cd46aa615b?w=64&h=64&fit=crop&q=80"
+                      width="32"
+                      height="32"
+                      loading="lazy"
+                    />
+                  </div>
+                  <div
+                    class="w-8 h-8 rounded-full border-2 border-white shadow-sm overflow-hidden bg-vestaSand"
+                  >
+                    <img
+                      alt=""
+                      class="w-full h-full object-cover"
+                      src="https://images.unsplash.com/photo-1548199973-03cce0bbc87b?w=64&h=64&fit=crop&q=80"
+                      width="32"
+                      height="32"
+                      loading="lazy"
+                    />
+                  </div>
+                </div>
+              </div>
+              <h1
+                class="font-sora text-3xl sm:text-5xl md:text-6xl lg:text-[80px] xl:text-[94px] font-extrabold leading-[1.05] mb-6 sm:mb-10 reveal-text tracking-tight"
+                data-split="words"
+              >
+                Your pet deserves absolute care.
+              </h1>
+              <p
+                class="text-lg sm:text-xl md:text-2xl text-vestaCharcoal/60 max-w-xl mb-12 sm:mb-16 leading-relaxed reveal-up font-medium"
+              >
+                Premium, background-checked concierge services for the most
+                discerning pets. Real-time GPS, health logs, and 24/7 love.
+              </p>
+              <div
+                class="flex flex-col sm:flex-row gap-6 sm:gap-8 items-center reveal-up"
+              >
+                <div class="magnetic-btn-wrap w-full sm:w-auto">
+                  <button
+                    type="button"
+                    class="w-full sm:w-auto bg-vestaCharcoal text-white px-10 sm:px-14 py-5 sm:py-7 rounded-full font-bold text-xs uppercase tracking-[0.3em] hover:bg-vestaOrange hover:shadow-premium-lg transition-all duration-500 magnetic-btn"
+                  >
+                    Book a Sitter
+                  </button>
+                </div>
+                <button
+                  type="button"
+                  class="flex items-center gap-4 sm:gap-5 font-bold uppercase text-[10px] tracking-[0.3em] group focus:outline-none focus-visible:ring-2 focus-visible:ring-vestaOrange focus-visible:ring-offset-2 rounded-full"
+                >
+                  <span
+                    class="w-14 h-14 sm:w-16 sm:h-16 rounded-full border border-vestaCharcoal/10 flex items-center justify-center group-hover:bg-vestaOrange group-hover:border-vestaOrange transition-all duration-700"
+                  >
+                    <svg
+                      class="w-4 h-4 text-vestaCharcoal group-hover:text-white"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                      aria-hidden="true"
+                    >
+                      <path
+                        d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2.5"
+                      />
+                    </svg>
+                  </span>
+                  Our Story
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="lg:col-span-5 relative">
+            <div
+              class="relative z-10 rounded-[40px] sm:rounded-[60px] shadow-premium overflow-hidden"
+              id="hero-img-container"
+            >
+              <img
+                alt="Premium Pet Portrait"
+                class="w-full h-[400px] sm:h-[550px] lg:h-[700px] object-cover scale-110 no-zoom"
+                src="https://images.unsplash.com/photo-1587300003388-59208cc962cb?w=800&q=85"
+                width="800"
+                height="700"
+                fetchpriority="high"
+                alt="Happy dog in premium care"
+              />
+            </div>
+            <div
+              class="hero-float-wrap absolute top-6 sm:top-8 -right-8 sm:-right-12 bg-white/90 backdrop-blur-xl p-6 sm:p-8 rounded-[32px] sm:rounded-[40px] shadow-premium z-20 parallax-element hidden xl:block"
+              data-speed="1.2"
+            >
+              <div class="flex items-center gap-4 sm:gap-5">
+                <div
+                  class="w-12 h-12 sm:w-14 sm:h-14 bg-green-50 rounded-2xl flex items-center justify-center"
+                >
+                  <div
+                    class="w-3 h-3 bg-green-500 rounded-full animate-pulse"
+                  ></div>
+                </div>
+                <div>
+                  <p
+                    class="text-[9px] uppercase tracking-[0.3em] font-black text-vestaCharcoal/30"
+                  >
+                    Live Status
+                  </p>
+                  <p class="text-sm font-bold font-sora">
+                    Winston is being pampered
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div
+              class="hero-float-wrap absolute bottom-4 sm:bottom-6 -left-4 sm:-left-8 bg-vestaOrange text-white p-6 sm:p-8 rounded-[28px] sm:rounded-[36px] shadow-premium-lg z-20 parallax-element hidden xl:block"
+              data-speed="-0.8"
+            >
+              <p
+                class="text-3xl sm:text-4xl font-sora font-black mb-1 tracking-tight"
+              >
+                4.9/5
+              </p>
+              <p
+                class="text-[9px] uppercase font-black tracking-[0.3em] opacity-70"
+              >
+                Client Excellence Score
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Services Section -->
+      <section
+        class="py-20 sm:py-28 lg:py-40 relative bg-vestaIvory"
+        id="services"
+      >
+        <div class="max-w-7xl mx-auto px-4 sm:px-8">
+          <div
+            class="flex flex-col md:flex-row justify-between md:items-end gap-8 sm:gap-12 mb-12 sm:mb-20 lg:mb-28"
+          >
+            <div class="max-w-2xl">
+              <span
+                class="text-[11px] font-black uppercase tracking-[0.5em] text-vestaOrange mb-4 sm:mb-6 block reveal-up"
+                >Exclusive Services</span
+              >
+              <h2
+                class="font-sora text-3xl sm:text-4xl md:text-5xl lg:text-[72px] xl:text-[88px] font-extrabold leading-[1.05] mb-4 sm:mb-6 reveal-text tracking-tight"
+                data-split="words"
+              >
+                Curated for Comfort.
+              </h2>
+            </div>
+            <div class="md:pb-1">
+              <p
+                class="text-vestaCharcoal/50 font-medium max-w-md reveal-up leading-relaxed text-base sm:text-lg"
+              >
+                Sophisticated environments and personalized attention designed
+                for your pet's physical and emotional peak.
+              </p>
+            </div>
+          </div>
+          <div
+            class="section-line mb-12 sm:mb-20 h-px bg-vestaCharcoal/10 origin-left scale-x-0"
+            id="services-line"
+          ></div>
+          <div
+            class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-px bg-vestaCharcoal/5 border border-vestaCharcoal/5 rounded-[40px] sm:rounded-[60px] overflow-hidden shadow-sm"
+            id="services-grid"
+          >
+            <!-- Card 01 -->
+            <article
+              class="bg-vestaIvory p-8 sm:p-14 hover:bg-white transition-all duration-1000 group relative overflow-hidden reveal-up service-card"
+            >
+              <div
+                class="text-[120px] sm:text-[150px] font-sora font-black text-vestaCharcoal/5 absolute -top-12 sm:-top-16 -right-8 sm:-right-10 group-hover:-translate-y-8 transition-transform duration-1000"
+              >
+                01
+              </div>
+              <div
+                class="w-14 h-14 sm:w-16 sm:h-16 bg-vestaSand rounded-2xl flex items-center justify-center mb-8 sm:mb-12 group-hover:bg-vestaOrange group-hover:rotate-12 transition-all duration-700"
+              >
+                <svg
+                  class="w-6 h-6 sm:w-7 sm:h-7 group-hover:text-white transition-colors"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  aria-hidden="true"
+                >
+                  <path
+                    d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"
+                    stroke-width="2"
+                  />
+                </svg>
+              </div>
+              <h3
+                class="font-sora text-xl sm:text-2xl font-bold mb-4 sm:mb-6 tracking-tight"
+              >
+                Social Clubs
+              </h3>
+              <p
+                class="text-vestaCharcoal/50 text-sm mb-8 sm:mb-12 leading-relaxed"
+              >
+                Tiered playgroups and sensory integration workshops for all
+                energy levels.
+              </p>
+              <ul class="space-y-3 sm:space-y-4 mb-10 sm:mb-14">
+                <li
+                  class="flex items-center gap-3 text-[10px] font-black uppercase tracking-[0.2em] text-vestaCharcoal/40 group-hover:text-vestaCharcoal transition-colors"
+                >
+                  <span
+                    class="w-1.5 h-1.5 rounded-full bg-vestaOrange flex-shrink-0"
+                  ></span>
+                  Social Mastery
+                </li>
+                <li
+                  class="flex items-center gap-3 text-[10px] font-black uppercase tracking-[0.2em] text-vestaCharcoal/40 group-hover:text-vestaCharcoal transition-colors"
+                >
+                  <span
+                    class="w-1.5 h-1.5 rounded-full bg-vestaOrange flex-shrink-0"
+                  ></span>
+                  Therapy Groups
+                </li>
+              </ul>
+              <a
+                class="inline-flex items-center gap-4 text-[10px] font-black uppercase tracking-[0.3em] group-hover:text-vestaOrange transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-vestaOrange focus-visible:ring-offset-2 rounded"
+                href="#"
+              >
+                Explore
+                <span
+                  class="w-10 h-px bg-vestaCharcoal group-hover:bg-vestaOrange group-hover:w-16 transition-all duration-700"
+                ></span>
+              </a>
+            </article>
+            <!-- Card 02 -->
+            <article
+              class="bg-vestaIvory p-8 sm:p-14 hover:bg-white transition-all duration-1000 group relative overflow-hidden reveal-up service-card"
+            >
+              <div
+                class="text-[120px] sm:text-[150px] font-sora font-black text-vestaCharcoal/5 absolute -top-12 sm:-top-16 -right-8 sm:-right-10 group-hover:-translate-y-8 transition-transform duration-1000"
+              >
+                02
+              </div>
+              <div
+                class="w-14 h-14 sm:w-16 sm:h-16 bg-vestaSand rounded-2xl flex items-center justify-center mb-8 sm:mb-12 group-hover:bg-vestaOrange group-hover:-rotate-12 transition-all duration-700"
+              >
+                <svg
+                  class="w-6 h-6 sm:w-7 sm:h-7 group-hover:text-white transition-colors"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  aria-hidden="true"
+                >
+                  <path d="M3 6l3 12h12l3-12H3z" stroke-width="2" />
+                </svg>
+              </div>
+              <h3
+                class="font-sora text-xl sm:text-2xl font-bold mb-4 sm:mb-6 tracking-tight"
+              >
+                Gourmet Dining
+              </h3>
+              <p
+                class="text-vestaCharcoal/50 text-sm mb-8 sm:mb-12 leading-relaxed"
+              >
+                Artisan meal prep and nutritional counseling for pets with
+                specific dietary needs.
+              </p>
+              <ul class="space-y-3 sm:space-y-4 mb-10 sm:mb-14">
+                <li
+                  class="flex items-center gap-3 text-[10px] font-black uppercase tracking-[0.2em] text-vestaCharcoal/40 group-hover:text-vestaCharcoal transition-colors"
+                >
+                  <span
+                    class="w-1.5 h-1.5 rounded-full bg-vestaOrange flex-shrink-0"
+                  ></span>
+                  Raw Specialists
+                </li>
+                <li
+                  class="flex items-center gap-3 text-[10px] font-black uppercase tracking-[0.2em] text-vestaCharcoal/40 group-hover:text-vestaCharcoal transition-colors"
+                >
+                  <span
+                    class="w-1.5 h-1.5 rounded-full bg-vestaOrange flex-shrink-0"
+                  ></span>
+                  Allergy Safe
+                </li>
+              </ul>
+              <a
+                class="inline-flex items-center gap-4 text-[10px] font-black uppercase tracking-[0.3em] group-hover:text-vestaOrange transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-vestaOrange focus-visible:ring-offset-2 rounded"
+                href="#"
+              >
+                Explore
+                <span
+                  class="w-10 h-px bg-vestaCharcoal group-hover:bg-vestaOrange group-hover:w-16 transition-all duration-700"
+                ></span>
+              </a>
+            </article>
+            <!-- Card 03 -->
+            <article
+              class="bg-vestaIvory p-8 sm:p-14 hover:bg-white transition-all duration-1000 group relative overflow-hidden reveal-up service-card"
+            >
+              <div
+                class="text-[120px] sm:text-[150px] font-sora font-black text-vestaCharcoal/5 absolute -top-12 sm:-top-16 -right-8 sm:-right-10 group-hover:-translate-y-8 transition-transform duration-1000"
+              >
+                03
+              </div>
+              <div
+                class="w-14 h-14 sm:w-16 sm:h-16 bg-vestaSand rounded-2xl flex items-center justify-center mb-8 sm:mb-12 group-hover:bg-vestaOrange group-hover:scale-110 transition-all duration-700"
+              >
+                <svg
+                  class="w-6 h-6 sm:w-7 sm:h-7 group-hover:text-white transition-colors"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  aria-hidden="true"
+                >
+                  <path d="M9 12l2 2 4-4" stroke-width="2" />
+                </svg>
+              </div>
+              <h3
+                class="font-sora text-xl sm:text-2xl font-bold mb-4 sm:mb-6 tracking-tight"
+              >
+                Development
+              </h3>
+              <p
+                class="text-vestaCharcoal/50 text-sm mb-8 sm:mb-12 leading-relaxed"
+              >
+                Elite behavioral coaching and positive reinforcement programs
+                for all life stages.
+              </p>
+              <ul class="space-y-3 sm:space-y-4 mb-10 sm:mb-14">
+                <li
+                  class="flex items-center gap-3 text-[10px] font-black uppercase tracking-[0.2em] text-vestaCharcoal/40 group-hover:text-vestaCharcoal transition-colors"
+                >
+                  <span
+                    class="w-1.5 h-1.5 rounded-full bg-vestaOrange flex-shrink-0"
+                  ></span>
+                  Elite Training
+                </li>
+                <li
+                  class="flex items-center gap-3 text-[10px] font-black uppercase tracking-[0.2em] text-vestaCharcoal/40 group-hover:text-vestaCharcoal transition-colors"
+                >
+                  <span
+                    class="w-1.5 h-1.5 rounded-full bg-vestaOrange flex-shrink-0"
+                  ></span>
+                  Calm Manners
+                </li>
+              </ul>
+              <a
+                class="inline-flex items-center gap-4 text-[10px] font-black uppercase tracking-[0.3em] group-hover:text-vestaOrange transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-vestaOrange focus-visible:ring-offset-2 rounded"
+                href="#"
+              >
+                Explore
+                <span
+                  class="w-10 h-px bg-vestaCharcoal group-hover:bg-vestaOrange group-hover:w-16 transition-all duration-700"
+                ></span>
+              </a>
+            </article>
+            <!-- Card 04 -->
+            <article
+              class="bg-vestaIvory p-8 sm:p-14 hover:bg-white transition-all duration-1000 group relative overflow-hidden reveal-up service-card"
+            >
+              <div
+                class="text-[120px] sm:text-[150px] font-sora font-black text-vestaCharcoal/5 absolute -top-12 sm:-top-16 -right-8 sm:-right-10 group-hover:-translate-y-8 transition-transform duration-1000"
+              >
+                04
+              </div>
+              <div
+                class="w-14 h-14 sm:w-16 sm:h-16 bg-vestaSand rounded-2xl flex items-center justify-center mb-8 sm:mb-12 group-hover:bg-vestaOrange group-hover:-rotate-12 transition-all duration-700"
+              >
+                <svg
+                  class="w-6 h-6 sm:w-7 sm:h-7 group-hover:text-white transition-colors"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  aria-hidden="true"
+                >
+                  <path
+                    d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"
+                    stroke-width="2"
+                  />
+                </svg>
+              </div>
+              <h3
+                class="font-sora text-xl sm:text-2xl font-bold mb-4 sm:mb-6 tracking-tight"
+              >
+                Full Visibility
+              </h3>
+              <p
+                class="text-vestaCharcoal/50 text-sm mb-8 sm:mb-12 leading-relaxed"
+              >
+                Crystal-clear communication and 4K video feeds accessible from
+                anywhere in the world.
+              </p>
+              <ul class="space-y-3 sm:space-y-4 mb-10 sm:mb-14">
+                <li
+                  class="flex items-center gap-3 text-[10px] font-black uppercase tracking-[0.2em] text-vestaCharcoal/40 group-hover:text-vestaCharcoal transition-colors"
+                >
+                  <span
+                    class="w-1.5 h-1.5 rounded-full bg-vestaOrange flex-shrink-0"
+                  ></span>
+                  HD Live Feed
+                </li>
+                <li
+                  class="flex items-center gap-3 text-[10px] font-black uppercase tracking-[0.2em] text-vestaCharcoal/40 group-hover:text-vestaCharcoal transition-colors"
+                >
+                  <span
+                    class="w-1.5 h-1.5 rounded-full bg-vestaOrange flex-shrink-0"
+                  ></span>
+                  Daily Journal
+                </li>
+              </ul>
+              <a
+                class="inline-flex items-center gap-4 text-[10px] font-black uppercase tracking-[0.3em] group-hover:text-vestaOrange transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-vestaOrange focus-visible:ring-offset-2 rounded"
+                href="#"
+              >
+                Explore
+                <span
+                  class="w-10 h-px bg-vestaCharcoal group-hover:bg-vestaOrange group-hover:w-16 transition-all duration-700"
+                ></span>
+              </a>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- About Section -->
+      <section class="py-20 sm:py-28 lg:py-40 relative overflow-hidden">
+        <div
+          class="max-w-7xl mx-auto px-4 sm:px-8 grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-24 items-center"
+        >
+          <div class="lg:col-span-6 relative">
+            <div
+              class="relative z-10 rounded-[80px_24px_80px_24px] sm:rounded-[120px_40px_120px_40px] shadow-premium-lg overflow-hidden image-reveal"
+              id="editorial-img-wrap"
+            >
+              <img
+                alt="Dogs playing in a premium care environment"
+                class="w-full h-[400px] sm:h-[600px] lg:h-[780px] object-cover scale-110 object-center"
+                src="https://images.unsplash.com/photo-1548199973-03cce0bbc87b?w=900&q=85"
+                width="900"
+                height="780"
+                loading="lazy"
+              />
+            </div>
+            <div
+              class="about-vision-card absolute -bottom-10 sm:-bottom-16 -right-10 sm:-right-16 bg-white p-8 sm:p-12 rounded-[40px] sm:rounded-[50px] shadow-premium-lg z-20 max-w-sm reveal-up parallax-element"
+              data-speed="1.2"
+            >
+              <p
+                class="font-sora font-black text-xl sm:text-2xl mb-4 sm:mb-5 tracking-tight"
+              >
+                The Vision
+              </p>
+              <p
+                class="text-sm text-vestaCharcoal/50 leading-relaxed mb-8 sm:mb-10 font-medium"
+              >
+                We believe pets are more than companions—they are cherished
+                family. We deliver uncompromising care in a sanctuary setting.
+              </p>
+              <div class="flex gap-8 sm:gap-12">
+                <div>
+                  <p
+                    class="text-3xl sm:text-4xl font-black text-vestaOrange font-sora tracking-tight"
+                  >
+                    85%
+                  </p>
+                  <p
+                    class="text-[9px] font-black uppercase tracking-[0.3em] opacity-30 mt-2"
+                  >
+                    Annual Growth
+                  </p>
+                </div>
+                <div class="w-px h-12 sm:h-14 bg-vestaCharcoal/10"></div>
+                <div>
+                  <p
+                    class="text-3xl sm:text-4xl font-black text-vestaOrange font-sora tracking-tight"
+                  >
+                    99.8%
+                  </p>
+                  <p
+                    class="text-[9px] font-black uppercase tracking-[0.3em] opacity-30 mt-2"
+                  >
+                    Safety Rating
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div
+              class="absolute -top-8 -left-8 w-40 h-40 sm:w-56 sm:h-56 border-2 border-vestaOrange/10 rounded-full animate-[spin_40s_linear_infinite] pointer-events-none"
+              aria-hidden="true"
+            ></div>
+          </div>
+          <div class="lg:col-span-6 lg:pl-16">
+            <span
+              class="text-[11px] font-black uppercase tracking-[0.5em] text-vestaCharcoal/30 block mb-8 sm:mb-12 reveal-up"
+              >Precision Care</span
+            >
+            <h2
+              class="font-sora text-3xl sm:text-4xl md:text-5xl lg:text-[72px] xl:text-[88px] font-extrabold leading-[1.05] mb-10 sm:mb-14 reveal-text tracking-tight"
+              data-split="words"
+            >
+              Designed for Pets, Always.
+            </h2>
+            <div class="space-y-16 sm:space-y-24">
+              <article class="group reveal-up">
+                <div class="flex gap-8 sm:gap-10">
+                  <div
+                    class="w-px h-20 sm:h-24 bg-vestaCharcoal/10 group-hover:bg-vestaOrange group-hover:h-32 transition-all duration-1000 flex-shrink-0"
+                  ></div>
+                  <div>
+                    <h4
+                      class="font-sora font-bold text-xl sm:text-2xl mb-4 sm:mb-5 group-hover:translate-x-3 transition-transform duration-700 tracking-tight"
+                    >
+                      Managed Sanctuaries
+                    </h4>
+                    <p
+                      class="text-vestaCharcoal/40 leading-relaxed text-base sm:text-lg font-medium"
+                    >
+                      Your pet's safety is non-negotiable. Our facilities are
+                      professionally optimized for comfort and sanitized beyond
+                      hospital standards daily.
+                    </p>
+                  </div>
+                </div>
+              </article>
+              <article class="group reveal-up">
+                <div class="flex gap-8 sm:gap-10">
+                  <div
+                    class="w-px h-20 sm:h-24 bg-vestaCharcoal/10 group-hover:bg-vestaOrange group-hover:h-32 transition-all duration-1000 flex-shrink-0"
+                  ></div>
+                  <div>
+                    <h4
+                      class="font-sora font-bold text-xl sm:text-2xl mb-4 sm:mb-5 group-hover:translate-x-3 transition-transform duration-700 tracking-tight"
+                    >
+                      Hyper-Personalization
+                    </h4>
+                    <p
+                      class="text-vestaCharcoal/40 leading-relaxed text-base sm:text-lg font-medium"
+                    >
+                      We treat every client as an individual, tailoring movement
+                      protocols, culinary preferences, and rest periods to their
+                      unique biology.
+                    </p>
+                  </div>
+                </div>
+              </article>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Immersive Section -->
+      <section
+        class="min-h-[70vh] sm:min-h-[800px] relative flex items-center justify-center overflow-hidden bg-vestaCharcoal py-20 sm:py-28"
+      >
+        <div
+          class="absolute inset-0 scale-105"
+          id="emotional-bg-container"
+        >
+          <img
+            alt=""
+            class="w-full h-full object-cover object-center"
+            id="emotional-bg-img"
+            src="https://images.unsplash.com/photo-1587300003388-59208cc962cb?w=1920&q=85"
+            loading="lazy"
+          />
+        </div>
+        <div
+          class="absolute inset-0 bg-gradient-to-b from-vestaCharcoal/75 via-vestaCharcoal/40 to-vestaCharcoal/75"
+          aria-hidden="true"
+        ></div>
+        <div class="relative z-10 text-center px-4 sm:px-8">
+          <div class="reveal-up overflow-hidden mb-8 sm:mb-12">
+            <span
+              class="text-[11px] font-black uppercase tracking-[0.6em] sm:tracking-[0.8em] text-white/60 block"
+              >UNMATCHED DEVOTION</span
+            >
+          </div>
+          <h2
+            class="font-sora text-4xl sm:text-5xl md:text-6xl lg:text-[100px] xl:text-[120px] 2xl:text-[140px] font-black text-white leading-none mb-12 sm:mb-16 reveal-text tracking-tight"
+            data-split="chars"
+          >
+            Beyond Sitting
+          </h2>
+          <div class="reveal-up">
+            <div class="magnetic-btn-wrap">
+              <button
+                type="button"
+                class="bg-white text-vestaCharcoal px-12 sm:px-16 py-6 sm:py-8 rounded-full font-bold text-xs uppercase tracking-[0.4em] hover:bg-vestaOrange hover:text-white transition-all shadow-premium-lg magnetic-btn"
+              >
+                The Experience
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Process Section -->
+      <section
+        class="bg-vestaCharcoal text-white py-20 sm:py-28 lg:py-40 overflow-hidden relative"
+        id="how-it-works"
+      >
+        <div
+          class="absolute top-0 right-0 text-[20rem] sm:text-[40rem] font-black text-white/[0.02] select-none pointer-events-none rotate-90 leading-none"
+          id="process-bg-text"
+          aria-hidden="true"
+        >
+          FLOW
+        </div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-8 relative z-10">
+          <div class="max-w-4xl mb-16 sm:mb-24 lg:mb-32">
+            <span
+              class="text-vestaOrange font-black text-[11px] tracking-[0.6em] uppercase mb-6 sm:mb-10 block reveal-up"
+              >The Methodology</span
+            >
+            <h2
+              class="font-sora text-3xl sm:text-4xl md:text-5xl lg:text-[80px] xl:text-[98px] font-extrabold leading-[1.05] reveal-text tracking-tight"
+              data-split="words"
+            >
+              The Path to Peak Wellness.
+            </h2>
+          </div>
+          <div
+            class="grid grid-cols-1 md:grid-cols-4 gap-12 sm:gap-16 md:gap-20 md:border-t border-white/10 pt-20 md:pt-28 relative"
+            id="steps-container"
+          >
+            <!-- Step 01 -->
+            <div class="relative group reveal-up step-item">
+              <div
+                class="w-4 h-4 sm:w-5 sm:h-5 rounded-full bg-white/20 absolute -top-[88px] md:-top-[114px] left-0 step-dot"
+              ></div>
+              <div
+                class="text-[80px] sm:text-[100px] md:text-[150px] font-sora font-black text-white/[0.03] absolute -top-28 sm:-top-36 md:-top-48 left-0 transition-all duration-1000 step-number"
+              >
+                01
+              </div>
+              <h3
+                class="font-sora text-2xl sm:text-3xl font-bold mb-6 sm:mb-10 group-hover:text-vestaOrange transition-colors tracking-tight"
+              >
+                Analysis
+              </h3>
+              <p
+                class="text-white/40 text-base sm:text-lg leading-relaxed font-medium"
+              >
+                A deep-dive consultation to map your pet's routine, psychology,
+                and health requirements.
+              </p>
+            </div>
+            <!-- Step 02 -->
+            <div class="relative group reveal-up step-item">
+              <div
+                class="w-4 h-4 sm:w-5 sm:h-5 rounded-full bg-white/20 absolute -top-[88px] md:-top-[114px] left-0 step-dot"
+              ></div>
+              <div
+                class="text-[80px] sm:text-[100px] md:text-[150px] font-sora font-black text-white/[0.03] absolute -top-28 sm:-top-36 md:-top-48 left-0 transition-all duration-1000 step-number"
+              >
+                02
+              </div>
+              <h3
+                class="font-sora text-2xl sm:text-3xl font-bold mb-6 sm:mb-10 group-hover:text-vestaOrange transition-colors tracking-tight"
+              >
+                Matching
+              </h3>
+              <p
+                class="text-white/40 text-base sm:text-lg leading-relaxed font-medium"
+              >
+                We hand-select an expert specialist whose personality and
+                certification align with your pet's vibe.
+              </p>
+            </div>
+            <!-- Step 03 -->
+            <div class="relative group reveal-up step-item">
+              <div
+                class="w-4 h-4 sm:w-5 sm:h-5 rounded-full bg-white/20 absolute -top-[88px] md:-top-[114px] left-0 step-dot"
+              ></div>
+              <div
+                class="text-[80px] sm:text-[100px] md:text-[150px] font-sora font-black text-white/[0.03] absolute -top-28 sm:-top-36 md:-top-48 left-0 transition-all duration-1000 step-number"
+              >
+                03
+              </div>
+              <h3
+                class="font-sora text-2xl sm:text-3xl font-bold mb-6 sm:mb-10 group-hover:text-vestaOrange transition-colors tracking-tight"
+              >
+                Induction
+              </h3>
+              <p
+                class="text-white/40 text-base sm:text-lg leading-relaxed font-medium"
+              >
+                A structured, multi-phase introduction sequence ensures seamless
+                trust and emotional safety.
+              </p>
+            </div>
+            <!-- Step 04 -->
+            <div class="relative group reveal-up step-item">
+              <div
+                class="w-4 h-4 sm:w-5 sm:h-5 rounded-full bg-white/20 absolute -top-[88px] md:-top-[114px] left-0 step-dot"
+              ></div>
+              <div
+                class="text-[80px] sm:text-[100px] md:text-[150px] font-sora font-black text-white/[0.03] absolute -top-28 sm:-top-36 md:-top-48 left-0 transition-all duration-1000 step-number"
+              >
+                04
+              </div>
+              <h3
+                class="font-sora text-2xl sm:text-3xl font-bold mb-6 sm:mb-10 group-hover:text-vestaOrange transition-colors tracking-tight"
+              >
+                Sustain
+              </h3>
+              <p
+                class="text-white/40 text-base sm:text-lg leading-relaxed font-medium"
+              >
+                Ongoing premium support with deep health analytics, lifestyle
+                logging, and genuine care.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- App Experience -->
+      <section
+        class="py-20 sm:py-28 lg:py-40 bg-vestaSand/20 relative overflow-hidden"
+        id="sitters"
+      >
+        <!-- Subtle context background so the section isn't flat -->
+        <div class="absolute inset-0 z-0 opacity-[0.06]" aria-hidden="true">
+          <img
+            src="https://images.unsplash.com/photo-1548199973-03cce0bbc87b?w=1200&q=60"
+            alt=""
+            class="w-full h-full object-cover object-center"
+          />
+        </div>
+        <div
+          class="max-w-7xl mx-auto px-4 sm:px-8 grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center relative z-10"
+        >
+          <div
+            class="order-2 lg:order-1 relative min-h-[400px] sm:h-[600px] lg:h-[800px] flex items-center justify-center"
+          >
+            <div
+              class="relative z-10 w-[280px] sm:w-[350px] h-[560px] sm:h-[720px] bg-vestaCharcoal rounded-[50px] sm:rounded-[65px] border-[10px] sm:border-[12px] border-vestaCharcoal shadow-premium-lg overflow-hidden reveal-up"
+              id="iphone-mockup"
+            >
+              <img
+                alt="PetVesta app – dog on walk"
+                class="w-full h-full object-cover object-center no-zoom"
+                src="https://images.unsplash.com/photo-1587300003388-59208cc962cb?w=400&h=800&fit=crop&q=85"
+                width="350"
+                height="720"
+                loading="lazy"
+              />
+              <div
+                class="absolute inset-0 bg-gradient-to-t from-vestaCharcoal/85 via-vestaCharcoal/20 to-transparent"
+              ></div>
+              <div
+                class="absolute bottom-12 sm:bottom-14 left-6 sm:left-10 right-6 sm:right-10 text-white"
+              >
+                <p
+                  class="text-[10px] font-black uppercase tracking-[0.3em] mb-3 sm:mb-4 opacity-50"
+                >
+                  Live Tracker
+                </p>
+                <p
+                  class="font-sora font-bold text-lg sm:text-2xl tracking-tight"
+                >
+                  Daisy is enjoying the organic park trails
+                </p>
+              </div>
+            </div>
+            <div
+              class="absolute top-16 sm:top-28 -left-4 sm:-left-16 bg-white/95 backdrop-blur-xl p-6 sm:p-8 rounded-2xl sm:rounded-3xl shadow-premium z-20 w-64 sm:w-80 notification-card top-left parallax-element"
+              data-speed="1.8"
+            >
+              <div class="flex items-center gap-4 sm:gap-5">
+                <div
+                  class="w-12 h-12 sm:w-14 sm:h-14 bg-vestaOrange rounded-2xl flex items-center justify-center text-white flex-shrink-0"
+                >
+                  <svg
+                    class="w-6 h-6 sm:w-7 sm:h-7"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                    aria-hidden="true"
+                  >
+                    <path
+                      d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
+                      stroke-width="2.5"
+                    />
+                  </svg>
+                </div>
+                <div class="min-w-0">
+                  <p
+                    class="text-[10px] font-black uppercase tracking-[0.3em] text-vestaCharcoal/30"
+                  >
+                    Just Now
+                  </p>
+                  <p class="text-sm font-bold">Nutrition Intake Logged</p>
+                </div>
+              </div>
+            </div>
+            <div
+              class="absolute bottom-32 sm:bottom-40 -right-4 sm:-right-16 bg-vestaCharcoal/95 backdrop-blur-xl text-white p-6 sm:p-8 rounded-2xl sm:rounded-3xl shadow-premium z-20 w-64 sm:w-80 notification-card bottom-right parallax-element"
+              data-speed="-1.4"
+            >
+              <div class="flex items-center gap-4 sm:gap-5">
+                <div
+                  class="w-12 h-12 sm:w-14 sm:h-14 bg-green-500 rounded-2xl flex items-center justify-center flex-shrink-0"
+                >
+                  <svg
+                    class="w-6 h-6 sm:w-7 sm:h-7"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                    aria-hidden="true"
+                  >
+                    <path d="M5 13l4 4L19 7" stroke-width="3" />
+                  </svg>
+                </div>
+                <div class="min-w-0">
+                  <p
+                    class="text-[10px] font-black uppercase tracking-[0.3em] text-white/40"
+                  >
+                    12m ago
+                  </p>
+                  <p class="text-sm font-bold">Wellness Check Verified</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="order-1 lg:order-2 lg:pl-16">
+            <span
+              class="text-[11px] font-black uppercase tracking-[0.6em] text-vestaOrange block mb-8 sm:mb-12 reveal-up"
+              >Seamless Intelligence</span
+            >
+            <h2
+              class="font-sora text-3xl sm:text-4xl md:text-5xl lg:text-[72px] xl:text-[88px] font-extrabold leading-[1.05] mb-10 sm:mb-14 reveal-text tracking-tight"
+              data-split="words"
+            >
+              Control with Complete Clarity.
+            </h2>
+            <p
+              class="text-lg sm:text-xl text-vestaCharcoal/50 leading-relaxed mb-16 sm:mb-20 reveal-up font-medium"
+            >
+              Our proprietary ecosystem ensures total transparency. From live
+              GPS tracking and high-definition photo journals to vital metric
+              monitoring, you're always connected.
+            </p>
+            <div class="flex flex-wrap gap-6 sm:gap-8 reveal-up">
+              <div class="magnetic-btn-wrap">
+                <a
+                  href="#"
+                  class="flex items-center gap-4 sm:gap-6 bg-white border border-vestaCharcoal/5 px-8 sm:px-10 py-5 sm:py-7 rounded-2xl sm:rounded-3xl shadow-premium hover:shadow-premium-lg transition-all cursor-pointer group magnetic-btn focus:outline-none focus-visible:ring-2 focus-visible:ring-vestaOrange focus-visible:ring-offset-2"
+                >
+                  <svg
+                    class="w-8 h-8 sm:w-10 sm:h-10 group-hover:scale-110 transition-transform duration-500 text-vestaCharcoal"
+                    fill="currentColor"
+                    viewBox="0 0 24 24"
+                    aria-hidden="true"
+                  >
+                    <path
+                      d="M17.5 13c-.8 0-1.5.7-1.5 1.5s.7 1.5 1.5 1.5 1.5-.7 1.5-1.5-.7-1.5-1.5-1.5zm-11 0c-.8 0-1.5.7-1.5 1.5s.7 1.5 1.5 1.5 1.5-.7 1.5-1.5-.7-1.5-1.5-1.5zM12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2zm0 18c-4.4 0-8-3.6-8-8s3.6-8 8-8 8 3.6 8 8-3.6 8-8 8z"
+                    />
+                  </svg>
+                  <div>
+                    <p
+                      class="text-[10px] font-black uppercase tracking-[0.3em] text-vestaCharcoal/30"
+                    >
+                      Download on
+                    </p>
+                    <p class="font-bold text-lg sm:text-xl tracking-tight">
+                      App Store
+                    </p>
+                  </div>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- CTA Section -->
+      <section class="py-20 sm:py-28 lg:py-40 px-4 sm:px-8" id="pricing">
+        <div
+          class="max-w-7xl mx-auto bg-vestaOrange rounded-[60px] sm:rounded-[100px] overflow-hidden flex flex-col lg:flex-row items-center relative shadow-premium-lg reveal-up"
+        >
+          <div class="p-12 sm:p-16 lg:p-32 lg:w-3/5 text-white relative z-10">
+            <h2
+              class="font-sora text-3xl sm:text-4xl md:text-5xl lg:text-[72px] xl:text-[98px] font-black mb-8 sm:mb-12 leading-[1.05] reveal-text tracking-tight"
+              data-split="words"
+            >
+              The standard has evolved.
+            </h2>
+            <p
+              class="text-xl sm:text-2xl text-white/85 mb-16 sm:mb-20 max-w-lg leading-relaxed reveal-up font-medium"
+            >
+              Join over 12,000 elite pet parents who demand nothing less than
+              perfection in care.
+            </p>
+            <div class="flex flex-wrap gap-6 sm:gap-10 reveal-up">
+              <div class="magnetic-btn-wrap">
+                <button
+                  type="button"
+                  class="bg-white text-vestaOrange px-12 sm:px-16 py-6 sm:py-8 rounded-full font-bold text-xs uppercase tracking-[0.4em] hover:bg-vestaCharcoal hover:text-white transition-all shadow-xl magnetic-btn"
+                >
+                  Start Membership
+                </button>
+              </div>
+              <div class="magnetic-btn-wrap">
+                <button
+                  type="button"
+                  class="border-2 border-white/30 text-white px-12 sm:px-16 py-6 sm:py-8 rounded-full font-bold text-xs uppercase tracking-[0.4em] hover:bg-white hover:text-vestaOrange transition-all magnetic-btn"
+                >
+                  Consultation
+                </button>
+              </div>
+            </div>
+          </div>
+          <div
+            class="lg:w-2/5 w-full min-w-0 flex-shrink-0 h-[300px] sm:h-[500px] lg:min-h-[700px] relative overflow-hidden cta-image-wrap"
+          >
+            <div class="absolute inset-0 z-[1] bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1587300003388-59208cc962cb?w=800&q=85');"></div>
+            <img
+              alt="Premium pet – PetVesta care"
+              class="absolute inset-0 w-full h-full object-cover object-center no-zoom z-[2]"
+              src="https://images.unsplash.com/photo-1587300003388-59208cc962cb?w=800&q=85"
+              width="800"
+              height="700"
+              loading="eager"
+              fetchpriority="high"
+              onerror="this.style.display='none'"
+            />
+            <div
+              class="absolute inset-0 bg-vestaOrange/10 mix-blend-multiply pointer-events-none z-[3]"
+              aria-hidden="true"
+            ></div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer
+      class="bg-vestaCharcoal text-white pt-20 sm:pt-28 lg:pt-40 pb-12 sm:pb-16"
+    >
+      <div class="max-w-7xl mx-auto px-4 sm:px-8">
+        <div
+          class="grid grid-cols-1 md:grid-cols-12 gap-16 sm:gap-24 mb-24 sm:mb-48"
+        >
+          <div class="md:col-span-5">
+            <a
+              href="#"
+              class="flex items-center gap-4 mb-10 sm:mb-14 group cursor-pointer reveal-up focus:outline-none focus-visible:ring-2 focus-visible:ring-vestaOrange focus-visible:ring-offset-2 focus-visible:ring-offset-vestaCharcoal rounded"
+            >
+              <div
+                class="w-12 h-12 sm:w-14 sm:h-14 bg-vestaOrange rounded-full flex items-center justify-center group-hover:rotate-[360deg] transition-transform duration-700"
+              >
+                <span class="text-white font-bold text-xs sm:text-sm">PV</span>
+              </div>
+              <span
+                class="font-sora font-extrabold text-3xl sm:text-4xl tracking-tight"
+                >PetVesta</span
+              >
+            </a>
+            <p
+              class="text-white/40 text-lg sm:text-2xl leading-relaxed mb-16 sm:mb-20 max-w-md reveal-up font-medium italic"
+            >
+              Redefining the relationship between luxury care and domestic
+              animals.
+            </p>
+            <div class="flex gap-6 sm:gap-8 reveal-up">
+              <div class="magnetic-btn-wrap">
+                <a
+                  class="w-14 h-14 sm:w-16 sm:h-16 rounded-full border border-white/10 flex items-center justify-center hover:bg-vestaOrange hover:border-vestaOrange transition-all duration-500 group magnetic-btn focus:outline-none focus-visible:ring-2 focus-visible:ring-vestaOrange focus-visible:ring-offset-2 focus-visible:ring-offset-vestaCharcoal"
+                  href="#"
+                  aria-label="Twitter"
+                >
+                  <svg
+                    class="w-6 h-6 sm:w-7 sm:h-7 group-hover:scale-110 transition-transform text-white/80"
+                    fill="currentColor"
+                    viewBox="0 0 24 24"
+                    aria-hidden="true"
+                  >
+                    <path
+                      d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"
+                    />
+                  </svg>
+                </a>
+              </div>
+            </div>
+          </div>
+          <div class="md:col-span-2 md:col-start-7 reveal-up">
+            <h4
+              class="font-sora font-bold text-lg sm:text-xl mb-10 sm:mb-14 tracking-tight"
+            >
+              Services
+            </h4>
+            <ul
+              class="space-y-6 sm:space-y-8 text-white/30 text-[10px] font-bold tracking-[0.3em] uppercase"
+            >
+              <li>
+                <a
+                  class="hover:text-vestaOrange transition-colors py-1 block"
+                  href="#"
+                  >Pet Sitting</a
+                >
+              </li>
+              <li>
+                <a
+                  class="hover:text-vestaOrange transition-colors py-1 block"
+                  href="#"
+                  >Dog Walking</a
+                >
+              </li>
+              <li>
+                <a
+                  class="hover:text-vestaOrange transition-colors py-1 block"
+                  href="#"
+                  >Overnight</a
+                >
+              </li>
+              <li>
+                <a
+                  class="hover:text-vestaOrange transition-colors py-1 block"
+                  href="#"
+                  >Medical Care</a
+                >
+              </li>
+            </ul>
+          </div>
+          <div class="md:col-span-2 reveal-up">
+            <h4
+              class="font-sora font-bold text-lg sm:text-xl mb-10 sm:mb-14 tracking-tight"
+            >
+              Ecosystem
+            </h4>
+            <ul
+              class="space-y-6 sm:space-y-8 text-white/30 text-[10px] font-bold tracking-[0.3em] uppercase"
+            >
+              <li>
+                <a
+                  class="hover:text-vestaOrange transition-colors py-1 block"
+                  href="#"
+                  >The App</a
+                >
+              </li>
+              <li>
+                <a
+                  class="hover:text-vestaOrange transition-colors py-1 block"
+                  href="#"
+                  >Sitter Portal</a
+                >
+              </li>
+              <li>
+                <a
+                  class="hover:text-vestaOrange transition-colors py-1 block"
+                  href="#"
+                  >Press Kit</a
+                >
+              </li>
+              <li>
+                <a
+                  class="hover:text-vestaOrange transition-colors py-1 block"
+                  href="#"
+                  >Ethics</a
+                >
+              </li>
+            </ul>
+          </div>
+          <div class="md:col-span-2 reveal-up">
+            <h4
+              class="font-sora font-bold text-lg sm:text-xl mb-10 sm:mb-14 tracking-tight"
+            >
+              Concierge
+            </h4>
+            <ul
+              class="space-y-6 sm:space-y-8 text-white/30 text-[10px] font-bold tracking-[0.3em] uppercase"
+            >
+              <li>
+                <a
+                  class="hover:text-vestaOrange transition-colors py-1 block"
+                  href="#"
+                  >Membership</a
+                >
+              </li>
+              <li>
+                <a
+                  class="hover:text-vestaOrange transition-colors py-1 block"
+                  href="#"
+                  >Gift a Visit</a
+                >
+              </li>
+              <li>
+                <a
+                  class="hover:text-vestaOrange transition-colors py-1 block"
+                  href="#"
+                  >Support</a
+                >
+              </li>
+              <li>
+                <a
+                  class="hover:text-vestaOrange transition-colors py-1 block"
+                  href="#"
+                  >Legal</a
+                >
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div
+          class="pt-16 sm:pt-24 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-8 sm:gap-16 reveal-up"
+        >
+          <p
+            class="text-white/20 text-[10px] font-black uppercase tracking-[0.4em] text-center md:text-left"
+          >
+            © <span id="footer-year">2024</span> PetVesta Technologies Inc.
+            Precision Care for Precision Pets.
+          </p>
+          <div
+            class="flex gap-8 sm:gap-16 text-[10px] font-black uppercase tracking-[0.4em] text-white/30"
+          >
+            <a class="hover:text-white transition-colors" href="#">Cookies</a>
+            <a class="hover:text-white transition-colors" href="#">Security</a>
+            <a class="hover:text-white transition-colors" href="#">Patents</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- GSAP Animation Logic -->
+    <script>
+      (function () {
+        "use strict";
+
+        gsap.registerPlugin(ScrollTrigger);
+
+        const reducedMotion = window.matchMedia(
+          "(prefers-reduced-motion: reduce)",
+        ).matches;
+
+        function initSplitText(selector) {
+          const elements = document.querySelectorAll(selector);
+          elements.forEach((el) => {
+            const splitType = el.getAttribute("data-split");
+            const text = el.innerText;
+            el.innerHTML = "";
+            el.classList.add("reveal-text-container");
+
+            if (splitType === "words") {
+              const words = text.split(" ");
+              words.forEach((word) => {
+                const wordSpan = document.createElement("span");
+                wordSpan.className =
+                  "reveal-text-container inline-block mr-[0.3em]";
+                wordSpan.innerHTML = `<span class="char inline-block">${word}</span>`;
+                el.appendChild(wordSpan);
+              });
+            } else if (splitType === "chars") {
+              const chars = text.split("");
+              chars.forEach((char) => {
+                const charSpan = document.createElement("span");
+                charSpan.className = "reveal-text-container inline-block";
+                charSpan.innerHTML = `<span class="char inline-block">${char === " " ? "\u00A0" : char}</span>`;
+                el.appendChild(charSpan);
+              });
+            }
+          });
+        }
+        initSplitText(".reveal-text");
+
+        // Footer year
+        var yearEl = document.getElementById("footer-year");
+        if (yearEl) yearEl.textContent = new Date().getFullYear();
+
+        // Mobile menu
+        var hamburger = document.getElementById("hamburger");
+        var drawer = document.getElementById("nav-drawer");
+        if (hamburger && drawer) {
+          hamburger.addEventListener("click", function () {
+            var open = drawer.classList.toggle("open");
+            hamburger.classList.toggle("open", open);
+            hamburger.setAttribute("aria-expanded", open);
+            hamburger.setAttribute(
+              "aria-label",
+              open ? "Close menu" : "Open menu",
+            );
+            drawer.setAttribute("aria-hidden", !open);
+            document.body.style.overflow = open ? "hidden" : "";
+          });
+          drawer.querySelectorAll("a").forEach(function (a) {
+            a.addEventListener("click", function () {
+              drawer.classList.remove("open");
+              hamburger.classList.remove("open");
+              hamburger.setAttribute("aria-expanded", "false");
+              hamburger.setAttribute("aria-label", "Open menu");
+              drawer.setAttribute("aria-hidden", "true");
+              document.body.style.overflow = "";
+            });
+          });
+        }
+
+        // Nav scroll effect (with explicit trigger)
+        ScrollTrigger.create({
+          trigger: document.body,
+          start: "top -80",
+          onUpdate: function () {
+            var nav = document.querySelector("nav");
+            if (!nav) return;
+            if (window.scrollY > 80) {
+              nav.classList.add("scrolled");
+            } else {
+              nav.classList.remove("scrolled");
+            }
+          },
+        });
+
+        // Scroll progress bar (tied to document)
+        gsap.to(".scroll-progress-bar", {
+          width: "100%",
+          ease: "none",
+          scrollTrigger: {
+            trigger: document.body,
+            start: "top top",
+            end: "bottom bottom",
+            scrub: 0.1,
+          },
+        });
+
+        // Hero parallax background text
+        gsap.to("#hero-bg-text", {
+          x: "-30%",
+          ease: "none",
+          scrollTrigger: {
+            trigger: "body",
+            start: "top top",
+            end: "bottom top",
+            scrub: 2,
+          },
+        });
+
+        // Process section BG text
+        var stepsContainer = document.getElementById("steps-container");
+        if (stepsContainer) {
+          gsap.to("#process-bg-text", {
+            x: "-20%",
+            ease: "none",
+            scrollTrigger: {
+              trigger: stepsContainer,
+              start: "top bottom",
+              end: "bottom top",
+              scrub: 3,
+            },
+          });
+        }
+
+        // Image zoom on scroll (exclude .no-zoom)
+        var zoomImages = document.querySelectorAll("img:not(.no-zoom)");
+        zoomImages.forEach(function (img) {
+          gsap.fromTo(
+            img,
+            { scale: 1.15 },
+            {
+              scale: 1,
+              ease: "none",
+              scrollTrigger: {
+                trigger: img,
+                start: "top bottom",
+                end: "bottom top",
+                scrub: true,
+              },
+            },
+          );
+        });
+
+        // Section-level reveals for services (all 4 cards together)
+        var servicesSection = document.getElementById("services");
+        var serviceCards = document.querySelectorAll(".service-card");
+        if (servicesSection && serviceCards.length && !reducedMotion) {
+          gsap.fromTo(
+            serviceCards,
+            { y: 60, opacity: 0 },
+            {
+              y: 0,
+              opacity: 1,
+              duration: 0.7,
+              stagger: 0.08,
+              ease: "power3.out",
+              scrollTrigger: {
+                trigger: servicesSection,
+                start: "top bottom",
+                once: true,
+              },
+            },
+          );
+        }
+
+        // Single-element reveal-up (exclude service cards, step items)
+        var revealUps = document.querySelectorAll(
+          ".reveal-up:not(.service-card):not(.step-item)",
+        );
+        if (!reducedMotion) {
+          revealUps.forEach(function (el) {
+            gsap.fromTo(
+              el,
+              { y: 60, opacity: 0 },
+              {
+                y: 0,
+                opacity: 1,
+                duration: 0.6,
+                ease: "power3.out",
+                scrollTrigger: {
+                  trigger: el,
+                  start: "top bottom",
+                  once: true,
+                },
+              },
+            );
+          });
+        }
+
+        // Process steps: section-level reveal so all 4 show
+        var processSection = document.getElementById("how-it-works");
+        var stepItems = document.querySelectorAll(".step-item");
+        if (processSection && stepItems.length && !reducedMotion) {
+          gsap.fromTo(
+            stepItems,
+            { y: 50, opacity: 0 },
+            {
+              y: 0,
+              opacity: 1,
+              duration: 0.6,
+              stagger: 0.1,
+              ease: "power3.out",
+              scrollTrigger: {
+                trigger: processSection,
+                start: "top bottom",
+                once: true,
+              },
+            },
+          );
+        }
+
+        // Text character/word reveal
+        var revealTexts = document.querySelectorAll(".reveal-text");
+        if (!reducedMotion) {
+          revealTexts.forEach(function (el) {
+            var chars = el.querySelectorAll(".char");
+            if (!chars.length) return;
+            gsap.to(chars, {
+              y: "0%",
+              opacity: 1,
+              duration: 1,
+              stagger: 0.03,
+              ease: "expo.out",
+              scrollTrigger: {
+                trigger: el,
+                start: "top bottom",
+                once: true,
+              },
+            });
+          });
+        } else {
+          revealTexts.forEach(function (el) {
+            var chars = el.querySelectorAll(".char");
+            chars.forEach(function (c) {
+              c.style.transform = "none";
+              c.style.opacity = "1";
+            });
+          });
+        }
+
+        // Image clip reveal
+        var imageReveals = document.querySelectorAll(".image-reveal");
+        if (!reducedMotion) {
+          imageReveals.forEach(function (el) {
+            gsap.fromTo(
+              el,
+              { clipPath: "inset(100% 0 0 0)" },
+              {
+                clipPath: "inset(0% 0 0 0)",
+                duration: 1.2,
+                ease: "expo.inOut",
+                scrollTrigger: {
+                  trigger: el,
+                  start: "top bottom",
+                  once: true,
+                },
+              },
+            );
+          });
+        } else {
+          imageReveals.forEach(function (el) {
+            el.style.clipPath = "none";
+          });
+        }
+
+        // Section line
+        var sectionLine = document.querySelector(".section-line");
+        if (sectionLine && !reducedMotion) {
+          gsap.to(sectionLine, {
+            scaleX: 1,
+            duration: 1.2,
+            ease: "expo.out",
+            scrollTrigger: {
+              trigger: sectionLine,
+              start: "top bottom",
+              once: true,
+            },
+          });
+        } else if (sectionLine) {
+          sectionLine.style.transform = "scaleX(1)";
+        }
+
+        // Parallax elements (explicit start/end)
+        var parallaxElements = document.querySelectorAll(".parallax-element");
+        if (!reducedMotion) {
+          parallaxElements.forEach(function (el) {
+            var speed = parseFloat(el.getAttribute("data-speed")) || 1;
+            gsap.to(el, {
+              y: -100 * speed,
+              ease: "none",
+              scrollTrigger: {
+                trigger: el.closest("section") || el,
+                start: "top bottom",
+                end: "bottom top",
+                scrub: 1.5,
+              },
+            });
+          });
+        }
+
+        // Emotional section parallax
+        var emotionalBg = document.getElementById("emotional-bg-container");
+        var emotionalImg = document.getElementById("emotional-bg-img");
+        if (emotionalBg && emotionalImg && !reducedMotion) {
+          gsap.fromTo(
+            emotionalImg,
+            { scale: 1.5, y: "-15%" },
+            {
+              scale: 1.1,
+              y: "15%",
+              ease: "none",
+              scrollTrigger: {
+                trigger: emotionalBg,
+                start: "top bottom",
+                end: "bottom top",
+                scrub: true,
+              },
+            },
+          );
+        }
+
+        // Step active states (add/remove on enter/leave)
+        stepItems.forEach(function (step) {
+          ScrollTrigger.create({
+            trigger: step,
+            start: "top 78%",
+            onEnter: function () {
+              step.classList.add("step-active");
+            },
+            onLeaveBack: function () {
+              step.classList.remove("step-active");
+            },
+          });
+        });
+
+        // Magnetic buttons
+        var magneticWraps = document.querySelectorAll(".magnetic-btn-wrap");
+        if (!reducedMotion) {
+          magneticWraps.forEach(function (wrap) {
+            var btn = wrap.querySelector(".magnetic-btn");
+            if (!btn) return;
+            wrap.addEventListener("mousemove", function (e) {
+              var rect = wrap.getBoundingClientRect();
+              var x = (e.clientX - rect.left - rect.width / 2) * 0.4;
+              var y = (e.clientY - rect.top - rect.height / 2) * 0.4;
+              gsap.to(btn, {
+                x: x,
+                y: y,
+                scale: 1.05,
+                duration: 0.4,
+                ease: "power3.out",
+              });
+            });
+            wrap.addEventListener("mouseleave", function () {
+              gsap.to(btn, {
+                x: 0,
+                y: 0,
+                scale: 1,
+                duration: 0.8,
+                ease: "elastic.out(1.2, 0.4)",
+              });
+            });
+          });
+        }
+
+        // iPhone mockup entrance
+        var iphoneMockup = document.getElementById("iphone-mockup");
+        if (iphoneMockup && !reducedMotion) {
+          gsap.fromTo(
+            iphoneMockup,
+            { rotateY: -20, rotateX: 15, y: 80, opacity: 0 },
+            {
+              rotateY: 0,
+              rotateX: 0,
+              y: 0,
+              opacity: 1,
+              duration: 1.2,
+              ease: "expo.out",
+              scrollTrigger: {
+                trigger: iphoneMockup,
+                start: "top bottom",
+                once: true,
+              },
+            },
+          );
+        }
+
+        // Refresh ScrollTrigger after layout is ready (fonts, images)
+        window.addEventListener("load", function () {
+          ScrollTrigger.refresh();
+        });
+        setTimeout(ScrollTrigger.refresh, 500);
+        ScrollTrigger.refresh();
+      })();
+    </script>
+  </body>
+</html>
